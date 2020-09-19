@@ -1,0 +1,17 @@
+.c-intro {
+  border-left: 1px solid #444;
+  color: white;
+  display: flex;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.c-intro__left {
+  padding: 0 10px;
+}
+
+.c-intro__right {
+  font: 400 14px/22px Roboto, "Helvetica Neue", sans-serif;
+  padding-right: 20px;
+  opacity: 0.7;
+}

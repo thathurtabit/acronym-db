@@ -1,0 +1,44 @@
+<mat-spinner class="app-loading" *ngIf="isLoading" diameter="30" color="accent"></mat-spinner>
+
+<div class="search-form-wrap" *ngIf="!isLoading && acronyms$ | async">
+  <form class="search-form">
+    <mat-icon class="search-form__icon" color="accent" aria-label="Search Acronyms"
+>search</mat-icon>
+      <input class="search-form__input" #searchInput (keyup)="onSearchInput(searchInput.value)" placeholder="Search acronyms">
+  </form>
+  <app-introduction></app-introduction>
+</div>
+
+<table
+  *ngIf="!isLoading && acronyms$ | async"
+  mat-table
+  [dataSource]="acronyms$ | async"
+  class="mat-elevation-z8"
+>
+  <ng-container
+    [matColumnDef]="column"
+    *ngFor="let column of acronymsColHeaders"
+  >
+    <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+    <td mat-cell *matCellDef="let acronym">
+      {{ acronym[column]
+      }}<app-learn-more-open-dialog-button
+        *ngIf="column === openMoreTitle"
+        [acronyms]="acronyms$ | async"
+        [acronymID]="acronym._id"
+        ></app-learn-more-open-dialog-button
+      >
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="acronymsColData"></tr>
+  <tr mat-row *matRowDef="let row; columns: acronymsColData"></tr>
+</table>
+
+<mat-card class="no-results-info" *ngIf="!isLoading && !acronyms$"
+  >Looks like <strong>"{{searchFilter}}"</strong> doesn't exist yet. Why not add it?</mat-card
+>
+
+<mat-card *ngIf="hasError"
+  >Sorry, and error has occured and cannot retrieve data. 😢</mat-card
+>

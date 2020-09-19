@@ -1,0 +1,99 @@
+<h2 class="add-acronym-form__title" >Add Acronym</h2>
+
+<div class="add-acronym-form__result-msg" *ngIf="acronymSentStatus === 'fail'"
+  ><h3>Oh no! 😢 </h3>
+  <p>There has been an error when talking to the server.</p>
+  <p>Please try again later.</p>
+</div>
+<div class="add-acronym-form__result-msg" *ngIf="acronymSentStatus === 'success'"
+  ><h3>Thank you! 😇</h3>
+  <p>Thanks for adding an acronym! You jargon buster, you.</p>
+</div>
+
+<form
+  *ngIf="acronymSentStatus !== 'fail'"
+  class="add-acronym-form"
+  [formGroup]="addAcronymForm"
+  (ngSubmit)="onSubmit(addAcronymForm.value)"
+>
+  <div class="add-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="add-acronym-form__field"
+    >
+      <mat-label>Acronym Name</mat-label>
+      <input matInput required formControlName="name" />
+      <mat-hint>i.e. 'CSS'</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="add-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="add-acronym-form__field"
+    >
+      <mat-label>Acronym Full Name</mat-label>
+      <input matInput required formControlName="title" />
+      <mat-hint>i.e. 'Cascading Style Sheets'</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="add-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="add-acronym-form__field"
+    >
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        required
+        rows="4"
+        formControlName="description"
+      ></textarea>
+    </mat-form-field>
+  </div>
+  <div class="add-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="add-acronym-form__field"
+    >
+      <mat-label>Link</mat-label>
+      <mat-hint>A URL to more information on this topic</mat-hint>
+      <input matInput formControlName="link" />
+    </mat-form-field>
+  </div>
+  <div class="add-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="add-acronym-form__field"
+    >
+      <mat-label>Your name</mat-label>
+      <input matInput required formControlName="author" />
+    </mat-form-field>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="add-acronym-form__actions" mat-dialog-actions>
+    <div class="add-acronym-form__actions-left">
+      <button mat-button mat-dialog-close color="primary">Close</button>
+    </div>
+    <div class="add-acronym-form__actions-right">
+      <button
+        *ngIf="acronymSentStatus !== 'pending'"
+        [disabled]="!addAcronymForm.valid"
+        mat-flat-button
+        type="submit"
+        color="accent"
+      >
+        Submit
+      </button>
+      <mat-spinner
+        *ngIf="acronymSentStatus === 'pending'"
+        diameter="20"
+        color="accent"
+      ></mat-spinner>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,23 @@
+.cdk-overlay-pane {
+  display: inline-block;
+  max-width: 600px !important;
+}
+
+.learn-more-dialog__row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 30px;
+}
+
+.learn-more-dialog__content {
+  line-height: 1.6;
+}
+
+.learn-more-dialog__author {
+  span {
+    text-transform: uppercase;
+    font-size: 10px;
+    opacity: 0.5;
+  }
+}
