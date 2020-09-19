@@ -58,7 +58,7 @@ import { EffectsModule } from '@ngrx/effects';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({app: acronymsTableReducer}),
+    StoreModule.forRoot({acronyms: acronymsTableReducer}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([AcronymsTableServiceEffects]),
     EffectsModule.forFeature([CreateAcronymServiceEffects])

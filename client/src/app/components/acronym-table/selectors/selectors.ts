@@ -5,10 +5,10 @@ import {
 } from '../../../models/acronyms.types';
 import { createSelector } from '@ngrx/store';
 
-export const getAcronyms = (state) => state.app.acronyms.table;
-export const getAcronymsList = (state) => state.app.acronyms.table.list;
-export const getAcronymsFetching = (state) => state.app.acronyms.table.fetching;
-export const getAcronymsHasError = (state) => state.app.acronyms.table.hasError;
+export const getAcronyms = (state) => state.acronyms.table;
+export const getAcronymsList = (state) => state.acronyms.table.list;
+export const getAcronymsFetching = (state) => state.acronyms.table.fetching;
+export const getAcronymsHasError = (state) => state.acronyms.table.hasError;
 
 export const selectAcronymsState = createSelector(
   getAcronyms,

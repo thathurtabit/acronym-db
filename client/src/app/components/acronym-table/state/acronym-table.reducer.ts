@@ -13,10 +13,8 @@ import {
 } from './acronym-table.actions';
 
 export const initialState: IAppState = {
-  acronyms: {
-    table: { list: undefined, fetching: false, hasError: false },
-    create: { acronym: undefined, working: false, hasError: false },
-  },
+  table: { list: undefined, fetching: false, hasError: false },
+  create: { acronym: undefined, working: false, hasError: false },
 };
 
 const reducer = createReducer(
@@ -24,80 +22,66 @@ const reducer = createReducer(
   on(getAcronyms.action, (state: IAppState) => {
     return {
       ...state,
-      acronyms: {
-        ...state.acronyms,
-        table: {
-          ...state.acronyms.table,
-          fetching: true,
-          hasError: false,
-        },
+      table: {
+        ...state.table,
+        fetching: true,
+        hasError: false,
       },
     };
   }),
   on(getAcronymsSuccess.action, (state, action) => {
     return {
       ...state,
-      acronyms: {
-        ...state.acronyms,
-        table: {
-          ...state.acronyms.table,
-          list: action.payload,
-          fetching: false,
-          hasError: false,
-        },
+      table: {
+        ...state.table,
+        list: action.payload,
+        fetching: false,
+        hasError: false,
       },
     };
   }),
   on(getAcronymsError.action, (state: IAppState) => {
     return {
       ...state,
-      acronyms: {
-        ...state.acronyms,
-        table: {
-          ...state.acronyms.table,
-          fetching: false,
-          hasError: true,
-        },
+      table: {
+        ...state.table,
+        fetching: false,
+        hasError: true,
       },
     };
   }),
   on(createAcronym.action, (state) => {
     return {
       ...state,
-      acronyms: {
-        ...state.acronyms,
-        create: {
-          ...state.acronyms.create,
-          working: true,
-          hasError: false,
-        },
+      create: {
+        ...state.create,
+        working: true,
+        hasError: false,
       },
     };
   }),
   on(createAcronymSuccess.action, (state, action) => {
     return {
       ...state,
-      acronyms: {
-        ...state.acronyms,
-        create: {
-          ...state.acronyms.create,
-          acronym: action.payload,
-          working: false,
-          hasError: false,
-        },
+      table: {
+        ...state.table,
+        list: [...state.table.list, action.payload],
+      },
+      create: {
+        ...state.create,
+        acronym: action.payload,
+        working: false,
+        hasError: false,
       },
     };
   }),
   on(createAcronymError.action, (state: IAppState) => {
     return {
       ...state,
-      acronyms: {
-        ...state.acronyms,
-        create: {
-          ...state.acronyms.create,
-          working: false,
-          hasError: true,
-        },
+      create: {
+        ...state.create,
+        working: false,
+        hasError: true,
       },
     };
   })

@@ -12,10 +12,8 @@ export interface IAcronymCreateState {
 }
 
 export interface IAppState {
-  acronyms: {
-    table: IAcronymsState;
-    create: IAcronymCreateState;
-  };
+  table: IAcronymsState;
+  create: IAcronymCreateState;
 }
 
 export interface IAppStateAndAction {
