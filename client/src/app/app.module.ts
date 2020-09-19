@@ -1,4 +1,5 @@
-import { AcronymsServiceEffects } from './components/acronym-table/effects/acronym-table.effects';
+import { CreateAcronymServiceEffects } from './components/add-acronym-dialog/effects/add-acronym.effects';
+import { AcronymsTableServiceEffects } from './components/acronym-table/effects/acronym-table.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -57,9 +58,10 @@ import { EffectsModule } from '@ngrx/effects';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({acronyms: acronymsTableReducer}),
+    StoreModule.forRoot({app: acronymsTableReducer}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
-    EffectsModule.forRoot([AcronymsServiceEffects]),
+    EffectsModule.forRoot([AcronymsTableServiceEffects]),
+    EffectsModule.forFeature([CreateAcronymServiceEffects])
   ],
   providers: [],
   bootstrap: [AppComponent],

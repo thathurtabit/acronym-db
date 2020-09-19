@@ -1,8 +1,9 @@
-import { IAcronym } from 'src/app/models/acronyms.types';
+import { createAcronym } from './state/add-acronym.actions';
+import { IAppState, IAcronym } from 'src/app/models/acronyms.types';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder } from '@angular/forms';
-import { AcronymsService } from 'src/app/services/acronyms.service';
+import { Store, select } from '@ngrx/store';
 
 enum EAcronymFormStatus {
   default = 'default',
@@ -21,7 +22,7 @@ export class AddAcronymDialogComponent implements OnInit {
   acronymSentStatus: EAcronymFormStatus;
 
   constructor(
-    private acronymService: AcronymsService,
+    private store: Store<IAppState>,
     private formBuilder: FormBuilder
   ) {
     this.addAcronymForm = this.formBuilder.group({
@@ -36,13 +37,7 @@ export class AddAcronymDialogComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(acronym: IAcronym): void {
-    this.acronymSentStatus = EAcronymFormStatus.pending;
-    this.acronymService.createAcronym(acronym).subscribe((response) => {
-      this.acronymSentStatus = !response.success
-        ? EAcronymFormStatus.fail
-        : EAcronymFormStatus.success;
-    });
-    console.log(acronym);
+    this.store.dispatch(createAcronym.action({ payload: acronym }));
   }
 }
 

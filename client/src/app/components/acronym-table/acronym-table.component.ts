@@ -4,7 +4,7 @@ import {
   selectAllAcronyms,
   selectFetchingAcronyms,
   selectHasErrorAcronyms,
-} from './../../selectors/selectors';
+} from './selectors/selectors';
 import { IAppState, IAcronym } from 'src/app/models/acronyms.types';
 import { getAcronyms } from './state/acronym-table.actions';
 import { Observable } from 'rxjs';
@@ -66,7 +66,7 @@ export class AcronymTableComponent implements OnInit {
       this.setShowAcronymTable({ isFetching, hasResults });
     });
     this.acronyms$.subscribe((arcs) => {
-      hasResults = arcs.length > 0;
+      hasResults = arcs?.length > 0;
       this.setShowAcronymTable({ isFetching, hasResults });
     });
   }

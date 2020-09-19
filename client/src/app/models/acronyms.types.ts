@@ -1,11 +1,26 @@
+import { Action } from '@ngrx/store';
 export interface IAcronymsState {
   list: IAcronym[];
   fetching: boolean;
   hasError: boolean;
 }
 
+export interface IAcronymCreateState {
+  acronym: IAcronym;
+  working: boolean;
+  hasError: boolean;
+}
+
 export interface IAppState {
-  acronyms: IAcronymsState;
+  acronyms: {
+    table: IAcronymsState;
+    create: IAcronymCreateState;
+  };
+}
+
+export interface IAppStateAndAction {
+  state: IAppState;
+  action: Action;
 }
 
 export interface IGetAcronymsService {

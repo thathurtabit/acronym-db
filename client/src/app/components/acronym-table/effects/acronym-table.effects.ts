@@ -11,7 +11,7 @@ import { AcronymsService } from '../../../services/acronyms.service';
 import { Action } from '@ngrx/store';
 
 @Injectable()
-export class AcronymsServiceEffects {
+export class AcronymsTableServiceEffects {
   getAcronyms$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType<Action>(getAcronyms.type),
