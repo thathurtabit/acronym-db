@@ -6,12 +6,11 @@ import {
   getAcronymsError,
 } from './acronym-table.actions';
 
-export const initialState = { acronyms: [], fetching: true, hasError: false };
+export const initialState = { list: [], fetching: false, hasError: false };
 
 const reducer = createReducer(
   initialState,
   on(getAcronyms.action, (state) => {
-    console.log('GET ACRONYMS');
     return {
       ...state,
       fetching: true,
@@ -19,16 +18,14 @@ const reducer = createReducer(
     };
   }),
   on(getAcronymsSuccess.action, (state, { payload }) => {
-    console.log('SUCCESS ACRONYMS');
     return {
       ...state,
-      acronyms: payload,
+      list: payload,
       fetching: false,
       hasError: false,
     };
   }),
   on(getAcronymsError.action, (state) => {
-    console.log('ERROR ACRONYMS');
     return {
       ...state,
       fetching: false,

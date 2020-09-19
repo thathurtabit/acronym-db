@@ -1,3 +1,13 @@
+export interface IAcronymsState {
+  list: IAcronym[];
+  fetching: boolean;
+  hasError: boolean;
+}
+
+export interface IAppState {
+  acronyms: IAcronymsState;
+}
+
 export interface IGetAcronymsService {
   success: boolean;
   data: IAcronym[];

@@ -1,16 +1,30 @@
-<mat-spinner class="app-loading" *ngIf="isLoading" diameter="30" color="accent"></mat-spinner>
+<mat-spinner
+  class="app-loading"
+  *ngIf="!showAcronymTable"
+  diameter="30"
+  color="accent"
+></mat-spinner>
 
-<div class="search-form-wrap" *ngIf="!isLoading && acronyms$ | async">
+<div class="search-form-wrap" *ngIf="showAcronymTable">
   <form class="search-form">
-    <mat-icon class="search-form__icon" color="accent" aria-label="Search Acronyms"
->search</mat-icon>
-      <input class="search-form__input" #searchInput (keyup)="onSearchInput(searchInput.value)" placeholder="Search acronyms">
+    <mat-icon
+      class="search-form__icon"
+      color="accent"
+      aria-label="Search Acronyms"
+      >search</mat-icon
+    >
+    <input
+      class="search-form__input"
+      #searchInput
+      (keyup)="onSearchInput(searchInput.value)"
+      placeholder="Search acronyms"
+    />
   </form>
   <app-introduction></app-introduction>
 </div>
 
 <table
-  *ngIf="!isLoading && acronyms$ | async"
+  *ngIf="showAcronymTable"
   mat-table
   [dataSource]="acronyms$ | async"
   class="mat-elevation-z8"
@@ -26,8 +40,7 @@
         *ngIf="column === openMoreTitle"
         [acronyms]="acronyms$ | async"
         [acronymID]="acronym._id"
-        ></app-learn-more-open-dialog-button
-      >
+      ></app-learn-more-open-dialog-button>
     </td>
   </ng-container>
 
@@ -35,10 +48,13 @@
   <tr mat-row *matRowDef="let row; columns: acronymsColData"></tr>
 </table>
 
-<mat-card class="no-results-info" *ngIf="!isLoading && !acronyms$"
-  >Looks like <strong>"{{searchFilter}}"</strong> doesn't exist yet. Why not add it?</mat-card
+<mat-card
+  class="no-results-info"
+  *ngIf="(!fetching$ | async) && (acronyms$ | async).length === 0"
+  >Looks like <strong>"{{ searchFilter }}"</strong> doesn't exist yet. Why not
+  add it?</mat-card
 >
 
-<mat-card *ngIf="hasError"
-  >Sorry, and error has occured and cannot retrieve data. 😢</mat-card
+<mat-card *ngIf="hasError$ | async"
+  >Sorry, an error has occured and cannot retrieve data. 😢</mat-card
 >

@@ -39,7 +39,9 @@ export class LearnMoreOpenDialogComponent {
 
   openDialog({ acronyms, acronymID }): void {
     this.dialog.open(LearnMoreDialogComponent, {
-      maxWidth: '600px',
+      width: '100%',
+      maxWidth: '550px',
+      minHeight: '250px',
       data: { acronyms, acronymID },
     });
   }
