@@ -10,6 +10,7 @@ import { getAcronyms } from './state/acronym-table.actions';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import * as utils from '../../utils/utils';
 
 @Component({
   selector: 'app-acronym-table',
@@ -36,24 +37,12 @@ export class AcronymTableComponent implements OnInit {
 
   constructor(private store: Store<IAppState>) {}
 
-  sortAcronymData(data: IAcronym[]): IAcronym[] {
-    if (!data) {
-      return data;
-    }
-
-    return data?.sort((a, b) => {
-      const textA = a?.name?.toUpperCase();
-      const textB = b?.name?.toUpperCase();
-      return textA < textB ? -1 : textA > textB ? 1 : 0;
-    });
-  }
-
   ngOnInit(): void {
     this.store.dispatch({ type: getAcronyms.type });
 
     this.acronyms$ = this.store
       .pipe(select(selectAllAcronyms))
-      .pipe(map((acronyms) => this.sortAcronymData(acronyms)));
+      .pipe(map((acronyms) => utils.sortAcronymData(acronyms)));
     this.acronymsInit$ = this.acronyms$;
     this.fetching$ = this.store.pipe(select(selectFetchingAcronyms));
     this.hasError$ = this.store.pipe(select(selectHasErrorAcronyms));
