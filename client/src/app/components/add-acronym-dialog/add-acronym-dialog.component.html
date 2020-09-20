@@ -1,17 +1,49 @@
-<h2 class="add-acronym-form__title" >Add Acronym</h2>
-
-<div class="add-acronym-form__result-msg" *ngIf="acronymSentStatus === 'fail'"
-  ><h3>Oh no! 😢 </h3>
+<div class="add-acronym-form__result-msg" *ngIf="showErrorMessage">
+  <h2 class="add-acronym-form__title">
+    <mat-icon color="primary" class="add-acronym-form__title-icon"
+      >add_circle</mat-icon
+    >
+    Oh no! 😢
+  </h2>
   <p>There has been an error when talking to the server.</p>
   <p>Please try again later.</p>
+  <div class="add-acronym-form__actions" mat-dialog-actions>
+    <div class="add-acronym-form__actions-left">
+      <button mat-button mat-dialog-close color="primary">Close</button>
+    </div>
+  </div>
 </div>
-<div class="add-acronym-form__result-msg" *ngIf="acronymSentStatus === 'success'"
-  ><h3>Thank you! 😇</h3>
-  <p>Thanks for adding an acronym! You jargon buster, you.</p>
+<div class="add-acronym-form__result-msg" *ngIf="showSuccessMessage">
+  <h2 class="add-acronym-form__title">
+    <mat-icon color="primary" class="add-acronym-form__title-icon"
+      >check_circle</mat-icon
+    >
+    Thank you 😇
+  </h2>
+  <p>
+    You added information for
+    <strong
+      >{{ (acronym$ | async)?.name }} | {{ (acronym$ | async)?.title }}</strong
+    >
+  </p>
+  <p>You jargon buster, you.</p>
+  <mat-divider></mat-divider>
+  <div class="add-acronym-form__actions" mat-dialog-actions>
+    <div class="add-acronym-form__actions-left">
+      <button mat-button mat-dialog-close color="primary">Close</button>
+    </div>
+  </div>
 </div>
 
+<h2 class="add-acronym-form__title" *ngIf="showCreateAcronymForm">
+  <mat-icon color="primary" class="add-acronym-form__title-icon"
+    >add_circle</mat-icon
+  >
+  Add Acronym
+</h2>
+
 <form
-  *ngIf="acronymSentStatus !== 'fail'"
+  *ngIf="showCreateAcronymForm"
   class="add-acronym-form"
   [formGroup]="addAcronymForm"
   (ngSubmit)="onSubmit(addAcronymForm.value)"
@@ -80,20 +112,21 @@
       <button mat-button mat-dialog-close color="primary">Close</button>
     </div>
     <div class="add-acronym-form__actions-right">
-      <button
-        *ngIf="acronymSentStatus !== 'pending'"
-        [disabled]="!addAcronymForm.valid"
-        mat-flat-button
-        type="submit"
-        color="accent"
-      >
-        Submit
-      </button>
       <mat-spinner
-        *ngIf="acronymSentStatus === 'pending'"
+        *ngIf="working$ | async as working; else submit"
         diameter="20"
         color="accent"
       ></mat-spinner>
+      <ng-template #submit>
+        <button
+          [disabled]="!addAcronymForm.valid"
+          mat-flat-button
+          type="submit"
+          color="accent"
+        >
+          Submit
+        </button>
+      </ng-template>
     </div>
   </div>
 </form>

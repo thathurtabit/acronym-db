@@ -1,5 +1,19 @@
 const Acronym = require("../models/acronyms-model");
 
+getAcronyms = async (req, res) => {
+  await Acronym.find({}, (err, acronyms) => {
+    if (err) {
+      return res.status(400).json({ success: false, error: err });
+    }
+    if (!acronyms?.length) {
+      return res
+        .status(404)
+        .json({ success: false, error: `Acronym not found` });
+    }
+    return res.status(200).json({ success: true, data: acronyms });
+  }).catch((err) => console.log(err));
+};
+
 createAcronym = (req, res) => {
   const body = req.body;
 
@@ -24,6 +38,7 @@ createAcronym = (req, res) => {
         success: true,
         id: acronym._id,
         message: "Acronym created!",
+        data: acronym,
       });
     })
     .catch((error) => {
@@ -103,20 +118,6 @@ getAcronymById = async (req, res) => {
         .json({ success: false, error: `Acronym not found` });
     }
     return res.status(200).json({ success: true, data: acronym });
-  }).catch((err) => console.log(err));
-};
-
-getAcronyms = async (req, res) => {
-  await Acronym.find({}, (err, acronyms) => {
-    if (err) {
-      return res.status(400).json({ success: false, error: err });
-    }
-    if (!acronyms?.length) {
-      return res
-        .status(404)
-        .json({ success: false, error: `Acronym not found` });
-    }
-    return res.status(200).json({ success: true, data: acronyms });
   }).catch((err) => console.log(err));
 };
 

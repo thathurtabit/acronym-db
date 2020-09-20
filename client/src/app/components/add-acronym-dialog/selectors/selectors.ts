@@ -5,11 +5,10 @@ import {
 } from '../../../models/acronyms.types';
 import { createSelector } from '@ngrx/store';
 
-export const getCreatedAcronym = (state: IAppState) =>
-  state.acronyms.create.acronym;
-export const getCreatedAcronymWorking = (state: IAppState) =>
+export const getCreatedAcronym = (state) => state.acronyms.create.acronym;
+export const getCreatedAcronymWorking = (state) =>
   state.acronyms.create.working;
-export const getCreatedAcronymHasError = (state: IAppState) =>
+export const getCreatedAcronymHasError = (state) =>
   state.acronyms.create.hasError;
 
 export const selectCreatedAcronym = createSelector(
@@ -17,12 +16,12 @@ export const selectCreatedAcronym = createSelector(
   (acronym: IAcronym) => acronym
 );
 
-export const selectgetCreatedAcronymWorking = createSelector(
+export const selectCreatedAcronymWorking = createSelector(
   getCreatedAcronymWorking,
   (working: boolean) => working
 );
 
-export const selectgetCreatedAcronymHasError = createSelector(
+export const selectCreatedAcronymHasError = createSelector(
   getCreatedAcronymHasError,
   (hasError: boolean) => hasError
 );

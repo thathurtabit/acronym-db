@@ -22,7 +22,7 @@ export class AcronymTableComponent implements OnInit {
   acronyms$: Observable<IAcronym[]>;
   fetching$: Observable<boolean>;
   hasError$: Observable<boolean>;
-  showAcronymTable: boolean;
+  showAcronymTable = false;
 
   searchFilter = '';
   openMoreTitle = 'more';
@@ -47,6 +47,7 @@ export class AcronymTableComponent implements OnInit {
     this.fetching$ = this.store.pipe(select(selectFetchingAcronyms));
     this.hasError$ = this.store.pipe(select(selectHasErrorAcronyms));
 
+    // TODO: Find a nicer way of resolving this.showAcronymTable
     let isFetching: boolean;
     let hasResults: boolean;
 
@@ -69,9 +70,13 @@ export class AcronymTableComponent implements OnInit {
     if (value !== '') {
       this.acronyms$ = this.acronyms$.pipe(
         map((acronyms) =>
-          acronyms.filter((acronym) =>
-            acronym.name.toUpperCase().includes(this.searchFilter.toUpperCase())
-          )
+          acronyms.filter((acronym) => {
+            return !acronym
+              ? null
+              : acronym?.name
+                  .toUpperCase()
+                  .includes(this.searchFilter.toUpperCase());
+          })
         )
       );
     } else {
