@@ -1,5 +1,12 @@
-<h1 mat-dialog-title><strong>{{ acronym?.name }}</strong> | {{ acronym?.title }}</h1>
-<div mat-dialog-content class="learn-more-dialog__content"><p>{{ acronym?.description }}</p></div>
+<div class="learn-more-dialog__title">
+  <h1 mat-dialog-title>
+    <strong>{{ acronym?.name }}</strong> | {{ acronym?.title }}
+  </h1>
+</div>
+
+<div mat-dialog-content class="learn-more-dialog__content">
+  <p>{{ acronym?.description }}</p>
+</div>
 
 <div class="learn-more-dialog__row">
   <div mat-dialog-content>
@@ -9,12 +16,18 @@
       rel="noreferrer noopener"
       mat-button
       color="accent"
-      >More about {{acronym?.name || 'this'}}</a
+      >More about {{ acronym?.name || "this" }}</a
     >
   </div>
-  <div class="learn-more-dialog__author"><span>Last edit</span> {{ acronym?.author || 'Captain Anonymous'}}</div>
+  <div class="learn-more-dialog__author">
+    <span>Last edit</span> {{ acronym?.author || "Captain Anonymous" }}
+  </div>
 </div>
 <mat-divider></mat-divider>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close color="primary">Close</button>
+  <app-edit-acronym-open-dialog-button
+    [acronymID]="acronym?._id"
+    [acronym]="acronym"
+  ></app-edit-acronym-open-dialog-button>
 </div>

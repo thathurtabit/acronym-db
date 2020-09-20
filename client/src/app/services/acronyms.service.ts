@@ -27,7 +27,7 @@ export class AcronymsService {
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
-    };;
+    };
   }
 
   getAcronyms(): Observable<IGetAcronymsService> {
@@ -51,16 +51,11 @@ export class AcronymsService {
       );
   }
 
-  editAcronym(id: string): Observable<IAcronym[]> {
-    return of([
-      {
-        _id: 'id',
-        title: 'title',
-        name: 'name',
-        description: 'description',
-        link: 'link',
-        author: 'author',
-      },
-    ]);
+  editAcronym(id: string, data: IAcronym): Observable<ICreateAcronymsService> {
+    return this.http
+      .put<any>(`${this.acronymnsEnpoint}/acronym/${id}`, data)
+      .pipe(
+        catchError(this.handleError('editAcronym', { success: false, data }))
+      );
   }
 }

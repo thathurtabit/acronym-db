@@ -79,6 +79,7 @@ updateAcronym = async (req, res) => {
           success: true,
           id: acronym._id,
           message: "Acronym updated!",
+          data: acronym,
         });
       })
       .catch((error) => {
@@ -102,7 +103,9 @@ deleteAcronym = async (req, res) => {
         .json({ success: false, error: `Acronym not found` });
     }
 
-    return res.status(200).json({ success: true, data: acronym });
+    return res
+      .status(200)
+      .json({ success: true, message: "Acronym deleted!", data: acronym });
   }).catch((err) => console.log(err));
 };
 

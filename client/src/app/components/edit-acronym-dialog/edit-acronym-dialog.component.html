@@ -1,0 +1,132 @@
+<div class="edit-acronym-form__result-msg" *ngIf="showErrorMessage">
+  <h2 class="edit-acronym-form__title">
+    <mat-icon color="primary" class="edit-acronym-form__title-icon"
+      >edit</mat-icon
+    >
+    Oh no! 😢
+  </h2>
+  <p>There has been an error when talking to the server.</p>
+  <p>Please try again later.</p>
+  <div class="edit-acronym-form__actions" mat-dialog-actions>
+    <div class="edit-acronym-form__actions-left">
+      <button mat-button (click)="onCloseAll()" color="primary">Close</button>
+    </div>
+  </div>
+</div>
+<div class="edit-acronym-form__result-msg" *ngIf="showSuccessMessage">
+  <h2 class="edit-acronym-form__title">
+    <mat-icon color="primary" class="edit-acronym-form__title-icon"
+      >check_circle</mat-icon
+    >
+    Thank you
+  </h2>
+  <p>
+    You edited information for
+    <strong
+      >{{ (acronym$ | async)?.name }} | {{ (acronym$ | async)?.title }}</strong
+    >
+  </p>
+  <p>Thanks for keeping the information useful</p>
+  <mat-divider></mat-divider>
+  <div class="edit-acronym-form__actions" mat-dialog-actions>
+    <div class="edit-acronym-form__actions-left">
+      <button mat-button (click)="onCloseAll()" color="primary">Close</button>
+    </div>
+  </div>
+</div>
+
+<h2 class="edit-acronym-form__title" *ngIf="showEditAcronymForm">
+  <mat-icon color="primary" class="edit-acronym-form__title-icon"
+    >edit</mat-icon
+  >
+  Edit Acronym
+</h2>
+
+<form
+  *ngIf="showEditAcronymForm"
+  class="edit-acronym-form"
+  [formGroup]="editAcronymForm"
+  (ngSubmit)="onSubmit(editAcronymForm.value)"
+>
+  <div class="edit-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="edit-acronym-form__field"
+    >
+      <mat-label>Acronym Name</mat-label>
+      <input matInput required formControlName="name" />
+      <mat-hint>i.e. 'CSS'</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="edit-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="edit-acronym-form__field"
+    >
+      <mat-label>Acronym Full Name</mat-label>
+      <input matInput required formControlName="title" />
+      <mat-hint>i.e. 'Cascading Style Sheets'</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="edit-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="edit-acronym-form__field"
+    >
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        required
+        rows="4"
+        formControlName="description"
+      ></textarea>
+    </mat-form-field>
+  </div>
+  <div class="edit-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="edit-acronym-form__field"
+    >
+      <mat-label>Link</mat-label>
+      <mat-hint>A URL to more information on this topic</mat-hint>
+      <input matInput formControlName="link" />
+    </mat-form-field>
+  </div>
+  <div class="edit-acronym-form__row">
+    <mat-form-field
+      color="accent"
+      appearance="fill"
+      class="edit-acronym-form__field"
+    >
+      <mat-label>Your name</mat-label>
+      <input matInput required formControlName="author" />
+    </mat-form-field>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="edit-acronym-form__actions" mat-dialog-actions>
+    <div class="edit-acronym-form__actions-left">
+      <button mat-button mat-dialog-close color="primary">Close</button>
+    </div>
+    <div class="edit-acronym-form__actions-right">
+      <mat-spinner
+        *ngIf="working$ | async as working; else submit"
+        diameter="20"
+        color="accent"
+      ></mat-spinner>
+      <ng-template #submit>
+        <button
+          [disabled]="!editAcronymForm.valid"
+          mat-flat-button
+          type="submit"
+          color="accent"
+        >
+          Update
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</form>

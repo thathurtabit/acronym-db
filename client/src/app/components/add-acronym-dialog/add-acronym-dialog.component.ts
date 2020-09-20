@@ -11,13 +11,6 @@ import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-enum EAcronymFormStatus {
-  default = 'default',
-  pending = 'pending',
-  success = 'success',
-  fail = 'fail',
-}
-
 @Component({
   selector: 'app-add-acronym-dialog',
   templateUrl: './add-acronym-dialog.component.html',
@@ -30,7 +23,7 @@ export class AddAcronymDialogComponent implements OnInit {
   hasError$: Observable<boolean>;
 
   addAcronymForm;
-  acronymSentStatus: EAcronymFormStatus;
+
   showCreateAcronymForm = true;
   showSuccessMessage = false;
   showErrorMessage = false;

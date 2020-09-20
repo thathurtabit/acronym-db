@@ -11,9 +11,16 @@ export interface IAcronymCreateState {
   hasError: boolean;
 }
 
+export interface IAcronymLastEditedState {
+  acronym: IAcronym;
+  working: boolean;
+  hasError: boolean;
+}
+
 export interface IAppState {
   table: IAcronymsState;
   create: IAcronymCreateState;
+  lastEdited: IAcronymLastEditedState;
 }
 
 export interface IAppStateAndAction {

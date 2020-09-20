@@ -1,3 +1,4 @@
+import { EditAcronymServiceEffects } from './components/edit-acronym-dialog/effects/edit-acronym.effects';
 import { CreateAcronymServiceEffects } from './components/add-acronym-dialog/effects/add-acronym.effects';
 import { AcronymsTableServiceEffects } from './components/acronym-table/effects/acronym-table.effects';
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,6 +25,10 @@ import {
   AddAcronymDialogComponent,
   AddAcronymOpenDialogComponent,
 } from './components/add-acronym-dialog/add-acronym-dialog.component';
+import {
+  EditAcronymDialogComponent,
+  EditAcronymOpenDialogComponent,
+} from './components/edit-acronym-dialog/edit-acronym-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -40,6 +45,8 @@ import { EffectsModule } from '@ngrx/effects';
     LearnMoreOpenDialogComponent,
     AddAcronymDialogComponent,
     AddAcronymOpenDialogComponent,
+    EditAcronymDialogComponent,
+    EditAcronymOpenDialogComponent,
   ],
   imports: [
     HttpClientModule,
@@ -61,7 +68,7 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot({acronyms: acronymsTableReducer}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([AcronymsTableServiceEffects]),
-    EffectsModule.forFeature([CreateAcronymServiceEffects])
+    EffectsModule.forFeature([CreateAcronymServiceEffects, EditAcronymServiceEffects])
   ],
   providers: [],
   bootstrap: [AppComponent],

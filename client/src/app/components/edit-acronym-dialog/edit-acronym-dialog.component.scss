@@ -1,0 +1,33 @@
+.edit-acronym-form__title {
+  display: flex;
+  align-items: center;
+
+  &-icon {
+    margin-right: 10px;
+  }
+}
+
+.edit-acronym-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-acronym-form__field {
+  width: 100%;
+  margin: 0 0 13px;
+}
+
+.edit-acronym-form__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-acronym-form__result-msg {
+  h3 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 17px;
+  }
+}

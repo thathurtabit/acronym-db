@@ -3,6 +3,11 @@ import {
   createAcronymSuccess,
   createAcronymError,
 } from './../../add-acronym-dialog/state/add-acronym.actions';
+import {
+  editAcronym,
+  editAcronymSuccess,
+  editAcronymError,
+} from './../../edit-acronym-dialog/state/edit-acronym.actions';
 import { IAppState } from 'src/app/models/acronyms.types';
 import { Action } from '@ngrx/store';
 import { createReducer, on } from '@ngrx/store';
@@ -15,6 +20,7 @@ import {
 export const initialState: IAppState = {
   table: { list: undefined, fetching: false, hasError: false },
   create: { acronym: undefined, working: false, hasError: false },
+  lastEdited: { acronym: undefined, working: false, hasError: false },
 };
 
 const reducer = createReducer(
@@ -80,6 +86,37 @@ const reducer = createReducer(
       ...state,
       create: {
         ...state.create,
+        working: false,
+        hasError: true,
+      },
+    };
+  }),
+  on(editAcronym.action, (state) => {
+    return {
+      ...state,
+      lastEdited: {
+        ...state.lastEdited,
+        working: true,
+        hasError: false,
+      },
+    };
+  }),
+  on(editAcronymSuccess.action, (state, action) => {
+    return {
+      ...state,
+      lastEdited: {
+        ...state.lastEdited,
+        acronym: action.payload,
+        working: false,
+        hasError: false,
+      },
+    };
+  }),
+  on(editAcronymError.action, (state: IAppState) => {
+    return {
+      ...state,
+      lastEdited: {
+        ...state.lastEdited,
         working: false,
         hasError: true,
       },
