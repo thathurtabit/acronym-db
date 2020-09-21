@@ -48,9 +48,7 @@
   <tr mat-row *matRowDef="let row; columns: acronymsColData"></tr>
 </table>
 
-<mat-card
-  class="no-results-info"
-  *ngIf="(!fetching$ | async) && (acronyms$ | async)?.length === 0"
+<mat-card class="no-results-info" *ngIf="(acronyms$ | async)?.length === 0"
   >Looks like <strong>"{{ searchFilter }}"</strong> doesn't exist yet. Why not
   add it?</mat-card
 >
