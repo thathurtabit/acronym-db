@@ -1,18 +1,4 @@
-<div class="edit-acronym-form__result-msg" *ngIf="showErrorMessage">
-  <h2 class="edit-acronym-form__title">
-    <mat-icon color="primary" class="edit-acronym-form__title-icon"
-      >edit</mat-icon
-    >
-    Oh no! 😢
-  </h2>
-  <p>There has been an error when talking to the server.</p>
-  <p>Please try again later.</p>
-  <div class="edit-acronym-form__actions" mat-dialog-actions>
-    <div class="edit-acronym-form__actions-left">
-      <button mat-button (click)="onCloseAll()" color="primary">Close</button>
-    </div>
-  </div>
-</div>
+<app-server-error-message *ngIf="showErrorMessage"></app-server-error-message>
 <div class="edit-acronym-form__result-msg" *ngIf="showSuccessMessage">
   <h2 class="edit-acronym-form__title">
     <mat-icon color="primary" class="edit-acronym-form__title-icon"
@@ -113,11 +99,15 @@
     </div>
     <div class="edit-acronym-form__actions-right">
       <mat-spinner
-        *ngIf="working$ | async as working; else submit"
+        *ngIf="working$ | async as working; else editOptions"
         diameter="20"
         color="accent"
       ></mat-spinner>
-      <ng-template #submit>
+      <ng-template #editOptions>
+        <app-delete-acronym-open-dialog-button
+          [acronym]="currentAcronym"
+          [acronymID]="currentAcronymID"
+        ></app-delete-acronym-open-dialog-button>
         <button
           [disabled]="!editAcronymForm.valid"
           mat-flat-button

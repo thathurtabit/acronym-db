@@ -1,0 +1,58 @@
+<app-server-error-message *ngIf="showErrorMessage"></app-server-error-message>
+<div class="delete-acronym-prompt__result-msg" *ngIf="showSuccessMessage">
+  <h2 class="delete-acronym-prompt__title">
+    <mat-icon color="primary" class="delete-acronym-prompt__title-icon"
+      >check_circle</mat-icon
+    >
+    Done!
+  </h2>
+  <p>
+    You deleted the entry for
+    <strong
+      >{{ (deletedAcronym$ | async)?.name }} |
+      {{ (deletedAcronym$ | async)?.title }}</strong
+    >
+  </p>
+  <p>Thanks for keeping things tidy</p>
+  <mat-divider></mat-divider>
+  <div class="delete-acronym-prompt__actions" mat-dialog-actions>
+    <div class="delete-acronym-prompt__actions-left">
+      <button mat-button (click)="onCloseAll()" color="primary">Close</button>
+    </div>
+  </div>
+</div>
+
+<h2 class="delete-acronym-prompt__title" *ngIf="showDeleteAcronymPrompt">
+  <mat-icon color="primary" class="delete-acronym-prompt__title-icon"
+    >delete_outline</mat-icon
+  >
+  Delete Acronym
+</h2>
+
+<div class="delete-acronym-prompt" *ngIf="showDeleteAcronymPrompt">
+  <div class="delete-acronym-prompt__result-msg">
+    <p>
+      Are you sure you want to delete<br /><strong
+        >{{ currentAcronym?.name }} | {{ currentAcronym?.title }}</strong
+      >?
+    </p>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="delete-acronym-prompt__actions" mat-dialog-actions>
+    <div class="delete-acronym-prompt__actions-left">
+      <button mat-button mat-dialog-close color="primary">Cancel</button>
+    </div>
+    <div class="delete-acronym-prompt__actions-right">
+      <mat-spinner
+        *ngIf="working$ | async as working; else deleteOptions"
+        diameter="20"
+        color="accent"
+      ></mat-spinner>
+      <ng-template #deleteOptions>
+        <button mat-flat-button (click)="onDelete()" color="accent">
+          Delete
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>

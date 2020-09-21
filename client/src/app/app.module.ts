@@ -1,3 +1,4 @@
+import { DeleteAcronymServiceEffects } from './components/delete-acronym-dialog/effects/delete-acronym.effects';
 import { EditAcronymServiceEffects } from './components/edit-acronym-dialog/effects/edit-acronym.effects';
 import { CreateAcronymServiceEffects } from './components/add-acronym-dialog/effects/add-acronym.effects';
 import { AcronymsTableServiceEffects } from './components/acronym-table/effects/acronym-table.effects';
@@ -29,11 +30,16 @@ import {
   EditAcronymDialogComponent,
   EditAcronymOpenDialogComponent,
 } from './components/edit-acronym-dialog/edit-acronym-dialog.component';
+import {
+  DeleteAcronymDialogComponent,
+  DeleteAcronymOpenDialogComponent,
+} from './components/delete-acronym-dialog/delete-acronym-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { acronymsTableReducer } from './components/acronym-table/state/acronym-table.reducer';
 import { EffectsModule } from '@ngrx/effects';
+import { ServerErrorMessageComponent } from './components/server-error-message/server-error-message.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +53,9 @@ import { EffectsModule } from '@ngrx/effects';
     AddAcronymOpenDialogComponent,
     EditAcronymDialogComponent,
     EditAcronymOpenDialogComponent,
+    DeleteAcronymDialogComponent,
+    DeleteAcronymOpenDialogComponent,
+    ServerErrorMessageComponent,
   ],
   imports: [
     HttpClientModule,
@@ -68,7 +77,7 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot({acronyms: acronymsTableReducer}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([AcronymsTableServiceEffects]),
-    EffectsModule.forFeature([CreateAcronymServiceEffects, EditAcronymServiceEffects])
+    EffectsModule.forFeature([CreateAcronymServiceEffects, EditAcronymServiceEffects, DeleteAcronymServiceEffects])
   ],
   providers: [],
   bootstrap: [AppComponent],

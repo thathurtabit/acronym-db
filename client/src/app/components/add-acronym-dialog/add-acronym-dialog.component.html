@@ -1,18 +1,4 @@
-<div class="add-acronym-form__result-msg" *ngIf="showErrorMessage">
-  <h2 class="add-acronym-form__title">
-    <mat-icon color="primary" class="add-acronym-form__title-icon"
-      >add_circle</mat-icon
-    >
-    Oh no! 😢
-  </h2>
-  <p>There has been an error when talking to the server.</p>
-  <p>Please try again later.</p>
-  <div class="add-acronym-form__actions" mat-dialog-actions>
-    <div class="add-acronym-form__actions-left">
-      <button mat-button mat-dialog-close color="primary">Close</button>
-    </div>
-  </div>
-</div>
+<app-server-error-message *ngIf="showErrorMessage"></app-server-error-message>
 <div class="add-acronym-form__result-msg" *ngIf="showSuccessMessage">
   <h2 class="add-acronym-form__title">
     <mat-icon color="primary" class="add-acronym-form__title-icon"

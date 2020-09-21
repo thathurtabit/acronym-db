@@ -58,4 +58,10 @@ export class AcronymsService {
         catchError(this.handleError('editAcronym', { success: false, data }))
       );
   }
+
+  deleteAcronym(id: string): Observable<ICreateAcronymsService> {
+    return this.http
+      .delete<any>(`${this.acronymnsEnpoint}/acronym/${id}`)
+      .pipe(catchError(this.handleError('deleteAcronym', { success: false })));
+  }
 }

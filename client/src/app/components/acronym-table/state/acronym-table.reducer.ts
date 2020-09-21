@@ -8,6 +8,11 @@ import {
   editAcronymSuccess,
   editAcronymError,
 } from './../../edit-acronym-dialog/state/edit-acronym.actions';
+import {
+  deleteAcronym,
+  deleteAcronymError,
+  deleteAcronymSuccess,
+} from '../../delete-acronym-dialog/state/delete-acronym.actions';
 import { IAppState } from 'src/app/models/acronyms.types';
 import { Action } from '@ngrx/store';
 import { createReducer, on } from '@ngrx/store';
@@ -21,6 +26,7 @@ export const initialState: IAppState = {
   table: { list: undefined, fetching: false, hasError: false },
   create: { acronym: undefined, working: false, hasError: false },
   lastEdited: { acronym: undefined, working: false, hasError: false },
+  lastDeleted: { acronym: undefined, working: false, hasError: false },
 };
 
 const reducer = createReducer(
@@ -117,6 +123,37 @@ const reducer = createReducer(
       ...state,
       lastEdited: {
         ...state.lastEdited,
+        working: false,
+        hasError: true,
+      },
+    };
+  }),
+  on(deleteAcronym.action, (state) => {
+    return {
+      ...state,
+      lastDeleted: {
+        ...state.lastDeleted,
+        working: true,
+        hasError: false,
+      },
+    };
+  }),
+  on(deleteAcronymSuccess.action, (state, action) => {
+    return {
+      ...state,
+      lastDeleted: {
+        ...state.lastDeleted,
+        acronym: action.payload,
+        working: false,
+        hasError: false,
+      },
+    };
+  }),
+  on(deleteAcronymError.action, (state: IAppState) => {
+    return {
+      ...state,
+      lastDeleted: {
+        ...state.lastDeleted,
         working: false,
         hasError: true,
       },

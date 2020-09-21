@@ -1,0 +1,15 @@
+<div class="server-error-message__result-msg">
+  <h2 class="server-error-message__title">
+    <mat-icon color="primary" class="server-error-message__title-icon"
+      >delete</mat-icon
+    >
+    Oh no! 😢
+  </h2>
+  <p>There has been an error when talking to the server.</p>
+  <p>Please try again later.</p>
+  <div class="server-error-message__actions" mat-dialog-actions>
+    <div class="server-error-message__actions-left">
+      <button mat-button (click)="onCloseAll()" color="primary">Close</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+:host {
+  margin-left: auto;
+  display: flex;
+}
+
+.c-delete-acronym-button {
+  cursor: pointer;
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  span {
+    margin: 0 10px;
+    font: 500 14px/32px Roboto, "Helvetica Neue", sans-serif;
+    text-transform: uppercase;
+  }
+}

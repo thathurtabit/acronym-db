@@ -17,10 +17,17 @@ export interface IAcronymLastEditedState {
   hasError: boolean;
 }
 
+export interface IAcronymLastDeletedState {
+  acronym: IAcronym;
+  working: boolean;
+  hasError: boolean;
+}
+
 export interface IAppState {
   table: IAcronymsState;
   create: IAcronymCreateState;
   lastEdited: IAcronymLastEditedState;
+  lastDeleted: IAcronymLastDeletedState;
 }
 
 export interface IAppStateAndAction {

@@ -1,4 +1,4 @@
-.edit-acronym-form__title {
+.delete-acronym-prompt__title {
   display: flex;
   align-items: center;
 
@@ -7,31 +7,28 @@
   }
 }
 
-.edit-acronym-form {
+.delete-acronym-prompt {
   display: flex;
   flex-direction: column;
 }
 
-.edit-acronym-form__field {
+.delete-acronym-prompt__field {
   width: 100%;
   margin: 0 0 13px;
 }
 
-.edit-acronym-form__actions {
+.delete-acronym-prompt__actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.edit-acronym-form__actions-right {
-  display: flex;
-}
-
-.edit-acronym-form__result-msg {
+.delete-acronym-prompt__result-msg {
   h3 {
     font-size: 20px;
   }
   p {
     font-size: 17px;
+    line-height: 1.5;
   }
 }

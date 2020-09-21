@@ -29,6 +29,9 @@ export class EditAcronymDialogComponent implements OnInit {
   working$: Observable<boolean>;
   hasError$: Observable<boolean>;
 
+  currentAcronym: IAcronym;
+  currentAcronymID: string;
+
   editAcronymForm;
 
   showEditAcronymForm = true;
@@ -48,6 +51,9 @@ export class EditAcronymDialogComponent implements OnInit {
       link: acronymData.acronym.link,
       author: acronymData.acronym.author,
     });
+
+    this.currentAcronymID = this.acronymData.acronymID;
+    this.currentAcronym = this.acronymData.acronym;
   }
 
   ngOnInit(): void {}
