@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { DeleteAcronymDialogComponent } from './delete-acronym-dialog.component';
+import { StoreModule } from '@ngrx/store';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  DeleteAcronymDialogComponent,
+  DeleteAcronymOpenDialogComponent,
+} from './delete-acronym-dialog.component';
 
 describe('DeleteAcronymDialogComponent', () => {
   let component: DeleteAcronymDialogComponent;
@@ -8,7 +13,18 @@ describe('DeleteAcronymDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DeleteAcronymDialogComponent],
+      providers: [
+        DeleteAcronymDialogComponent,
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {},
+        },
+      ],
+      imports: [StoreModule.forRoot({}), MatIconModule, MatDialogModule],
+      declarations: [
+        DeleteAcronymDialogComponent,
+        DeleteAcronymOpenDialogComponent,
+      ],
     }).compileComponents();
   }));
 

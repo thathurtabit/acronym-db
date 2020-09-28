@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { StoreModule } from '@ngrx/store';
+import { MatIconModule } from '@angular/material/icon';
 import { IntroductionComponent } from './introduction.component';
 
 describe('IntroductionComponent', () => {
@@ -8,9 +9,9 @@ describe('IntroductionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IntroductionComponent ]
-    })
-    .compileComponents();
+      imports: [StoreModule.forRoot({}), MatIconModule],
+      declarations: [IntroductionComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

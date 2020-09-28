@@ -3,7 +3,7 @@ import { EditAcronymServiceEffects } from './components/edit-acronym-dialog/effe
 import { CreateAcronymServiceEffects } from './components/add-acronym-dialog/effects/add-acronym.effects';
 import { AcronymsTableServiceEffects } from './components/acronym-table/effects/acronym-table.effects';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -81,5 +81,8 @@ import { ServerErrorMessageComponent } from './components/server-error-message/s
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class AppModule {}

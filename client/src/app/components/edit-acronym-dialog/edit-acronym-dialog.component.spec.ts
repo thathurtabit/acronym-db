@@ -1,6 +1,18 @@
+import { FormBuilder } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  EditAcronymDialogComponent,
+  EditAcronymOpenDialogComponent,
+} from './edit-acronym-dialog.component';
 
-import { EditAcronymDialogComponent } from './edit-acronym-dialog.component';
+const dummyAcronymFormValue = {
+  acronym: {
+    name: 'Stephen',
+  },
+};
 
 describe('EditAcronymDialogComponent', () => {
   let component: EditAcronymDialogComponent;
@@ -8,7 +20,19 @@ describe('EditAcronymDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditAcronymDialogComponent],
+      providers: [
+        FormBuilder,
+        EditAcronymDialogComponent,
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: dummyAcronymFormValue,
+        },
+      ],
+      imports: [StoreModule.forRoot({}), MatIconModule, MatDialogModule],
+      declarations: [
+        EditAcronymDialogComponent,
+        EditAcronymOpenDialogComponent,
+      ],
     }).compileComponents();
   }));
 
